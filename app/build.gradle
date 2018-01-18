@@ -32,6 +32,8 @@ dependencies {
 
     // Android support libraries
     implementation "com.android.support:appcompat-v7:$android_support_version"
+    implementation "com.android.support:design:$android_support_version"
+    implementation "com.android.support:recyclerview-v7:$android_support_version"
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
 
     // Tests
