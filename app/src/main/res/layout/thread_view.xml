@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tool="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -8,16 +9,26 @@
         android:id="@+id/contact_avatar"
         android:layout_width="60dp"
         android:layout_height="60dp"
+        android:src="@drawable/ic_avatar"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:src="@drawable/ic_avatar" />
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/last_message"
-        android:layout_width="wrap_content"
+    <FrameLayout
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toEndOf="@+id/contact_avatar"
-        app:layout_constraintTop_toTopOf="@+id/contact_avatar"
-        android:background="@color/colorPrimaryDark"
-        android:text="@string/hello_world" />
+        app:layout_constraintLeft_toRightOf="@id/contact_avatar"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/contact_avatar">
+
+        <fr.meteordesign.personaapp.ui.customcomponent.MessageView
+            android:id="@+id/last_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minHeight="50dp"
+            android:paddingBottom="50dp"
+            android:paddingEnd="50dp"
+            android:paddingStart="50dp"
+            android:paddingTop="50dp"
+            tool:text="@string/hello_world" />
+    </FrameLayout>
 </android.support.constraint.ConstraintLayout>

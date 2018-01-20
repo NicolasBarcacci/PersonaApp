@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello_world">Hello World!</string>
+    <string name="text_sample_1">Suspendisse bibendum mauris eu leo luctus.</string>
+    <string name="text_sample_2">Aliquam rhoncus scelerisque quam, quis ultrices libero malesuada nec. Sed metus tortor.</string>
+    <string name="text_sample_3">Maecenas eu sem ut mi pretium lobortis. Vestibulum placerat lacus eu ornare fermentum. Suspendisse condimentum aliquet lacus sed efficitur. Proin tincidunt efficitur augue, semper malesuada quam vehicula eget. Aliquam nisi sapien, varius ut tortor nec, scelerisque mattis felis. Suspendisse rutrum facilisis sapien nec finibus. Mauris in auctor augue. Mauris tincidunt euismod luctus. Cras ac odio vel magna posuere elementum. Integer a tellus ac nibh efficitur gravida vel in nibh. Integer consequat tortor elit, nec gravida eros blandit nec. Proin a ipsum eu est tincidunt pharetra sed at dui. Cras nec lectus scelerisque, tincidunt est sit amet, vehicula mauris.</string>
+</resources>

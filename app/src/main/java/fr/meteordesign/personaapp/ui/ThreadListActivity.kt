@@ -6,6 +6,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.Menu
 import fr.meteordesign.personaapp.R
+import fr.meteordesign.personaapp.ui.adapter.ThreadListAdapter
 
 class ThreadListActivity : AppCompatActivity() {
 
