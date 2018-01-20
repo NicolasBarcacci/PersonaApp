@@ -1,10 +1,12 @@
 package fr.meteordesign.personaapp.ui.customcomponent
 
 import android.content.Context
+import android.content.res.Resources
 import android.graphics.*
 import android.support.annotation.FloatRange
 import android.util.AttributeSet
 import android.widget.TextView
+import fr.meteordesign.personaapp.dpToPx
 import fr.meteordesign.personaapp.messageParamsType1
 
 private const val MIN_ANGLE: Double = -45.0
@@ -35,22 +37,23 @@ class MessageView : TextView {
 
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
         super.onSizeChanged(w, h, oldw, oldh)
-        recalculateExteriorPath(w, h)
-        recalculateInteriorPath()
+        val resources = context.resources
+        recalculateExteriorPath(resources, w, h)
+        recalculateInteriorPath(resources)
     }
 
-    private fun recalculateExteriorPath(width: Int, height: Int) {
+    private fun recalculateExteriorPath(resources: Resources, width: Int, height: Int) {
         val leftBottomPoint = PointF(
-                params.exteriorLeftSideShift.x,
-                height - params.exteriorLeftSideShift.y)
+                dpToPx(resources, params.exteriorLeftSideShift.x),
+                height - dpToPx(resources, params.exteriorLeftSideShift.y))
         val leftSideParams = AngleQuadrilateral.SideParams(
                 params.exteriorLeftSideAngle,
                 height * params.exteriorLeftSideRatio)
         exteriorQuadrilateral.setLeftSideFromBottomPoint(leftBottomPoint, leftSideParams)
 
         val topRightPoint = PointF(
-                width - params.exteriorRightSideShift.x,
-                params.exteriorRightSideShift.y)
+                width - dpToPx(resources, params.exteriorRightSideShift.x),
+                        dpToPx(resources, params.exteriorRightSideShift.y))
         val rightSideParams = AngleQuadrilateral.SideParams(
                 params.exteriorRightSideAngle,
                 height * params.exteriorRightSideRatio)
@@ -59,20 +62,20 @@ class MessageView : TextView {
         exteriorPath = exteriorQuadrilateral.generatePath()
     }
 
-    private fun recalculateInteriorPath() {
+    private fun recalculateInteriorPath(resources: Resources) {
         interiorPath.reset()
         interiorPath.moveTo(
-                exteriorQuadrilateral.leftTopPoint.x + params.interiorLeftTopShit.x,
-                exteriorQuadrilateral.leftTopPoint.y + params.interiorLeftTopShit.y)
+                exteriorQuadrilateral.leftTopPoint.x + dpToPx(resources, params.interiorLeftTopShit.x),
+                exteriorQuadrilateral.leftTopPoint.y + dpToPx(resources, params.interiorLeftTopShit.y))
         interiorPath.lineTo(
-                exteriorQuadrilateral.rightTopPoint.x - params.interiorRightTopShift.x,
-                exteriorQuadrilateral.rightTopPoint.y + params.interiorRightTopShift.y)
+                exteriorQuadrilateral.rightTopPoint.x - dpToPx(resources, params.interiorRightTopShift.x),
+                exteriorQuadrilateral.rightTopPoint.y + dpToPx(resources, params.interiorRightTopShift.y))
         interiorPath.lineTo(
-                exteriorQuadrilateral.rightBottomPoint.x - params.interiorRightBottomShift.x,
-                exteriorQuadrilateral.rightBottomPoint.y - params.interiorRightBottomShift.y)
+                exteriorQuadrilateral.rightBottomPoint.x - dpToPx(resources, params.interiorRightBottomShift.x),
+                exteriorQuadrilateral.rightBottomPoint.y - dpToPx(resources, params.interiorRightBottomShift.y))
         interiorPath.lineTo(
-                exteriorQuadrilateral.leftBottomPoint.x + params.interiorLeftBottomShift.x,
-                exteriorQuadrilateral.leftBottomPoint.y - params.interiorLeftBottomShift.y)
+                exteriorQuadrilateral.leftBottomPoint.x + dpToPx(resources, params.interiorLeftBottomShift.x),
+                exteriorQuadrilateral.leftBottomPoint.y - dpToPx(resources, params.interiorLeftBottomShift.y))
         interiorPath.close()
     }
 

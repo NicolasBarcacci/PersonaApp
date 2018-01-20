@@ -11,6 +11,6 @@ val messageParamsType1 = MessageView.Params(
         0.96F,
         PointF(10F, 10F),
         PointF(5F, 10F),
-        PointF(5F, 7F),
-        PointF(40F, 10F),
+        PointF(5F, 10F),
+        PointF(30F, 5F),
         PointF(10F, 10F))
