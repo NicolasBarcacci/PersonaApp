@@ -52,6 +52,7 @@ class MessageView : TextView {
 
     override fun onDraw(canvas: Canvas?) {
         if (canvas != null) {
+            porterDuffPaint.xfermode = null
             backgroundCanvas.drawBitmap(triangleBitmap1.onDraw(), 0F, 0F, porterDuffPaint)
             porterDuffPaint.xfermode = porterDuffMode
             backgroundCanvas.drawBitmap(triangleBitmap2.onDraw(), 0F, 0F, porterDuffPaint)
