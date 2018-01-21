@@ -29,10 +29,11 @@ class ThreadView(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private val lastMessage: TextView = itemView.findViewById(R.id.last_message)
 
     fun bind(position: Int) {
-        when (position % 3) {
+        when (position % 4) {
             0 -> lastMessage.setText(R.string.text_sample_1)
             1 -> lastMessage.setText(R.string.text_sample_2)
             2 -> lastMessage.setText(R.string.text_sample_3)
+            3 -> lastMessage.setText(R.string.text_sample_4)
         }
     }
 }

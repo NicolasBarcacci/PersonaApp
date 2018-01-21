@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tool="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:maxWidth="500dp">
 
     <ImageView
         android:id="@+id/contact_avatar"
@@ -18,17 +19,13 @@
         android:layout_height="wrap_content"
         app:layout_constraintLeft_toRightOf="@id/contact_avatar"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@id/contact_avatar">
+        app:layout_constraintTop_toTopOf="parent">
 
         <fr.meteordesign.personaapp.ui.customcomponent.MessageView
             android:id="@+id/last_message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:minHeight="50dp"
-            android:paddingBottom="50dp"
-            android:paddingEnd="50dp"
-            android:paddingStart="50dp"
-            android:paddingTop="50dp"
+            android:maxLines="5"
             tool:text="@string/hello_world" />
     </FrameLayout>
 </android.support.constraint.ConstraintLayout>
