@@ -4,8 +4,8 @@ import android.content.Context
 import android.graphics.*
 import android.util.AttributeSet
 import android.widget.TextView
-import fr.meteordesign.personaapp.dpToPx
 import fr.meteordesign.personaapp.messageParamsType1
+import fr.meteordesign.personaapp.messageParamsType2
 
 class MessageView : TextView {
 
@@ -13,60 +13,44 @@ class MessageView : TextView {
     constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs)
     constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
 
-    private val triangleBitmap1 = TriangleBitmap()
-    private val triangleBitmap2 = TriangleBitmap()
-    private val backgroundPaint = Paint()
+    private lateinit var exteriorShape: PersonaShapeDrawer
+    private var exteriorPaint = Paint()
 
-    private lateinit var backgroundBitmap: Bitmap
-    private lateinit var backgroundCanvas: Canvas
-
-    private val porterDuffPaint = Paint()
-    private val porterDuffMode = PorterDuffXfermode(PorterDuff.Mode.SRC_IN)
-
-    private val params = messageParamsType1
+    private lateinit var interiorShape: PersonaShapeDrawer
+    private var interiorPaint = Paint()
 
     init {
-        backgroundPaint.isAntiAlias = true
-        backgroundPaint.color = Color.rgb(0, 0, 0)
-        triangleBitmap1.paint = backgroundPaint
-        triangleBitmap2.paint = backgroundPaint
+        exteriorPaint.isAntiAlias = true
+        exteriorPaint.color = Color.rgb(255, 255, 255)
 
-        triangleBitmap1.params = params.triangleParams1
-        triangleBitmap2.params = params.triangleParams2
+        interiorPaint.isAntiAlias = true
+        interiorPaint.color = Color.rgb(0, 0, 0)
 
-        setPadding(dpToPx(resources, params.paddingLeft).toInt(),
-                dpToPx(resources, params.paddingTop).toInt(),
-                dpToPx(resources, params.paddingRight).toInt(),
-                dpToPx(resources, params.paddingBottom).toInt())
+        setPadding(messageParamsType1.paddingLeft,
+                messageParamsType1.paddingTop,
+                messageParamsType1.paddingRight,
+                messageParamsType1.paddingBottom)
     }
 
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
         super.onSizeChanged(w, h, oldw, oldh)
-
-        triangleBitmap1.onSizeChanged(w, h)
-        triangleBitmap2.onSizeChanged(w, h)
-
-        backgroundBitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888)
-        backgroundCanvas = Canvas(backgroundBitmap)
+        exteriorShape = PersonaShapeDrawer(w, h, messageParamsType1.triangleParams1, messageParamsType1.triangleParams2)
+        interiorShape = PersonaShapeDrawer(w, h, messageParamsType2.triangleParams1, messageParamsType2.triangleParams2)
     }
 
     override fun onDraw(canvas: Canvas?) {
         if (canvas != null) {
-            porterDuffPaint.xfermode = null
-            backgroundCanvas.drawBitmap(triangleBitmap1.onDraw(), 0F, 0F, porterDuffPaint)
-            porterDuffPaint.xfermode = porterDuffMode
-            backgroundCanvas.drawBitmap(triangleBitmap2.onDraw(), 0F, 0F, porterDuffPaint)
-
-            canvas.drawBitmap(backgroundBitmap, 0F, 0F, Paint())
+            exteriorShape.onDraw(canvas, exteriorPaint)
+            interiorShape.onDraw(canvas, interiorPaint)
         }
         super.onDraw(canvas)
     }
 
     data class Params(
-            val paddingLeft: Float,
-            val paddingTop: Float,
-            val paddingRight: Float,
-            val paddingBottom: Float,
-            val triangleParams1: TriangleBitmap.Params,
-            val triangleParams2: TriangleBitmap.Params)
+            val paddingLeft: Int,
+            val paddingTop: Int,
+            val paddingRight: Int,
+            val paddingBottom: Int,
+            val triangleParams1: TriangleDrawer.Params,
+            val triangleParams2: TriangleDrawer.Params)
 }
