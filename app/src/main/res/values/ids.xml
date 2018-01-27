@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item type="id" name="persona_style" />
+    <item type="id" name="persona_shape_drawer_exterior" />
+    <item type="id" name="persona_shape_drawer_interior" />
+</resources>

@@ -7,8 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import fr.meteordesign.personaapp.R
+import fr.meteordesign.personaapp.avatarStyle1
 import fr.meteordesign.personaapp.messageStyle1
 import fr.meteordesign.personaapp.ui.customcomponent.MessageView
+import fr.meteordesign.personaapp.ui.customcomponent.setPersonaStyle
 
 class ThreadListAdapter(context: Context) : RecyclerView.Adapter<ThreadView>() {
 
@@ -31,7 +33,8 @@ class ThreadView(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private val lastMessage: MessageView = itemView.findViewById(R.id.last_message)
 
     fun bind(position: Int) {
-        lastMessage.style = messageStyle1
+        contactAvatar.setPersonaStyle(avatarStyle1)
+        lastMessage.setPersonaStyle(messageStyle1)
         when (position % 4) {
             0 -> lastMessage.setText(R.string.text_sample_1)
             1 -> lastMessage.setText(R.string.text_sample_2)

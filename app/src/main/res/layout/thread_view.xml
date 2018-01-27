@@ -5,11 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <ImageView
+    <fr.meteordesign.personaapp.ui.customcomponent.AvatarView
         android:id="@+id/contact_avatar"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="0dp"
+        android:layout_height="90dp"
         android:src="@drawable/ic_avatar"
+        app:layout_constraintDimensionRatio="3:2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

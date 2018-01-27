@@ -5,19 +5,19 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
 import android.util.AttributeSet
-import android.widget.TextView
+import android.widget.ImageView
 
-class MessageView : TextView {
+class AvatarView: ImageView {
 
     private var exteriorPaint = Paint()
     private var interiorPaint = Paint()
 
     init {
         exteriorPaint.isAntiAlias = true
-        exteriorPaint.color = Color.rgb(255, 255, 255)
+        exteriorPaint.color = Color.rgb(0, 0, 0)
 
         interiorPaint.isAntiAlias = true
-        interiorPaint.color = Color.rgb(0, 0, 0)
+        interiorPaint.color = Color.rgb(0, 255, 0)
     }
 
     constructor(context: Context?) : super(context)
