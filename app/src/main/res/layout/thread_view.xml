@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tool="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:maxWidth="500dp">
+    android:layout_height="wrap_content">
 
     <ImageView
         android:id="@+id/contact_avatar"
@@ -26,7 +25,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:maxLines="5"
-            android:minWidth="100dp"
             tool:text="@string/hello_world" />
     </FrameLayout>
 </android.support.constraint.ConstraintLayout>

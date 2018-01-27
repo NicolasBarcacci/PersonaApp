@@ -1,29 +1,39 @@
 package fr.meteordesign.personaapp.ui.customcomponent
 
-import android.graphics.*
+import android.graphics.Path
+import fr.meteordesign.personaapp.PointD
+import fr.meteordesign.personaapp.calculateEquationIntersection
+import fr.meteordesign.personaapp.calculateLinearEquation
 
-class PersonaShapeDrawer(width: Int, height: Int, triangle1Params: TriangleDrawer.Params,
-                         triangle2Params: TriangleDrawer.Params) {
+class PersonaShapeDrawer(width: Int, height: Int, params: Params) {
 
-    private val triangle1Drawer = TriangleDrawer(width, height, triangle1Params)
-    private val triangle1Bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
-    private val triangle1Canvas = Canvas(triangle1Bitmap)
-    private val triangle2Drawer = TriangleDrawer(width, height, triangle2Params)
-    private val triangle2Bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
-    private val triangle2Canvas = Canvas(triangle2Bitmap)
-    private val resultBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
-    private val resultCanvas = Canvas(resultBitmap)
-    private val porterDuffPaint = Paint()
-    private val porterDuffMode = PorterDuffXfermode(PorterDuff.Mode.SRC_IN)
+    val path: Path
 
-    fun onDraw(canvas: Canvas, paint: Paint) {
-        triangle1Drawer.onDraw(triangle1Canvas, paint)
-        triangle2Drawer.onDraw(triangle2Canvas, paint)
+    init {
+        val a = PointD(params.topLeftCorner.x, params.topLeftCorner.y)
+        val c = PointD(width - params.bottomRightCorner.x, height - params.bottomRightCorner.y)
 
-        resultCanvas.drawBitmap(triangle1Bitmap, 0F, 0F, porterDuffPaint)
-        porterDuffPaint.xfermode = porterDuffMode
-        resultCanvas.drawBitmap(triangle2Bitmap, 0F, 0F, porterDuffPaint)
+        val leftSideEquation = calculateLinearEquation(a, params.leftAngle)
+        val topSideEquation = calculateLinearEquation(a, params.topAngle)
+        val rightSideEquation = calculateLinearEquation(c, params.rightAngle)
+        val bottomSideEquation = calculateLinearEquation(c, params.bottomAngle)
 
-        canvas.drawBitmap(resultBitmap, 0F, 0F, Paint())
+        val b = calculateEquationIntersection(topSideEquation, rightSideEquation)
+        val d = calculateEquationIntersection(leftSideEquation, bottomSideEquation)
+
+        path = Path()
+        path.moveTo(a.x.toFloat(), a.y.toFloat())
+        path.lineTo(b.x.toFloat(), b.y.toFloat())
+        path.lineTo(c.x.toFloat(), c.y.toFloat())
+        path.lineTo(d.x.toFloat(), d.y.toFloat())
+        path.close()
     }
+
+    data class Params(
+            val topLeftCorner: PointD,
+            val bottomRightCorner: PointD,
+            val leftAngle: Double,
+            val topAngle: Double,
+            val rightAngle: Double,
+            val bottomAngle: Double)
 }

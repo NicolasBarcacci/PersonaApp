@@ -6,13 +6,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.TextView
 import fr.meteordesign.personaapp.R
+import fr.meteordesign.personaapp.messageStyle1
+import fr.meteordesign.personaapp.ui.customcomponent.MessageView
 
 class ThreadListAdapter(context: Context) : RecyclerView.Adapter<ThreadView>() {
 
     private val layoutInflater: LayoutInflater by lazy {
-        context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater }
+        context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+    }
 
     override fun getItemCount(): Int = 50
 
@@ -26,9 +28,10 @@ class ThreadListAdapter(context: Context) : RecyclerView.Adapter<ThreadView>() {
 
 class ThreadView(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private val contactAvatar: ImageView = itemView.findViewById(R.id.contact_avatar)
-    private val lastMessage: TextView = itemView.findViewById(R.id.last_message)
+    private val lastMessage: MessageView = itemView.findViewById(R.id.last_message)
 
     fun bind(position: Int) {
+        lastMessage.style = messageStyle1
         when (position % 4) {
             0 -> lastMessage.setText(R.string.text_sample_1)
             1 -> lastMessage.setText(R.string.text_sample_2)
