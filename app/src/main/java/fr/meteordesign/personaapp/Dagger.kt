@@ -6,7 +6,7 @@ import dagger.Component
 import dagger.Module
 import dagger.Provides
 import fr.meteordesign.personaapp.model.Message
-import fr.meteordesign.personaapp.ui.ThreadListActivity
+import fr.meteordesign.personaapp.ui.ThreadActivity
 import java.util.*
 import javax.inject.Singleton
 
@@ -46,5 +46,5 @@ class MockMessageModule {
 @Singleton
 @Component(modules = [AppModule::class, MockMessageModule::class])
 interface AppComponent {
-    fun inject(threadListActivity: ThreadListActivity)
+    fun inject(threadActivity: ThreadActivity)
 }
